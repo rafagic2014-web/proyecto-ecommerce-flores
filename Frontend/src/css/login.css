@@ -1,0 +1,319 @@
+/* ==============================================
+   LOGIN / REGISTRO — pantalla partida
+   ============================================== */
+
+.auth {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  min-height: 100vh;
+}
+
+/* ---------- Panel de marca ---------- */
+.auth-aside {
+  position: relative;
+  background-image: url('/img/hero-flores.jpg');
+  background-size: cover;
+  background-position: center;
+  color: #fff;
+  isolation: isolate;
+}
+
+.auth-aside::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(150deg, rgba(23, 19, 15, 0.93), rgba(107, 38, 66, 0.72));
+}
+
+/* Columna: marca arriba, propuesta centrada abajo.
+   min-height en vez de height 100% para que el padding nunca
+   desborde si el contenido crece en pantallas cortas. */
+.auth-aside-inner {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--sp-16);
+  min-height: 100%;
+  padding: var(--sp-12) var(--sp-12);
+}
+
+.auth-brand {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.auth-logo {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--r-md);
+  background: rgba(255, 255, 255, 0.92);
+  padding: 3px;
+  box-shadow: var(--shadow-md);
+}
+
+.auth-brand-text {
+  min-width: 0;
+}
+
+.auth-point-text {
+  min-width: 0;
+}
+
+.auth-brand-name {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  line-height: 1.15;
+  margin: 0;
+}
+
+.auth-brand-tag {
+  font-size: var(--fs-sm);
+  color: rgba(255, 255, 255, 0.68);
+  margin: 2px 0 0;
+}
+
+.auth-pitch {
+  max-width: 34ch;
+}
+
+.auth-pitch-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 3vw, 2.5rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin-bottom: var(--sp-6);
+}
+
+.auth-points {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-5);
+  margin: 0;
+}
+
+/* align-items: center evita que el texto se descentrase
+   respecto al icono cuando el texto ocupa dos líneas */
+.auth-points li {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-4);
+  font-size: var(--fs-md);
+  color: rgba(255, 255, 255, 0.82);
+  line-height: 1.45;
+}
+
+.auth-point-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  border-radius: var(--r-full);
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--brand-200);
+}
+
+/* ---------- Panel del formulario ---------- */
+.auth-panel {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--sp-10) var(--sp-8);
+  background: var(--surface);
+}
+
+.auth-form-wrap {
+  width: 100%;
+  max-width: 400px;
+  animation: riseIn var(--t-slow) var(--ease-out) both;
+}
+
+.auth-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--sp-6);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--text-muted);
+  transition: color var(--t-base) var(--ease);
+}
+
+.auth-back:hover {
+  color: var(--brand-600);
+}
+
+/* ---------- Tabs ---------- */
+.auth-tabs {
+  display: inline-flex;
+  gap: 2px;
+  padding: 3px;
+  margin-bottom: var(--sp-6);
+  background: var(--surface-sunken);
+  border-radius: var(--r-md);
+}
+
+.auth-tab {
+  padding: 7px 16px;
+  border: 0;
+  border-radius: var(--r-sm);
+  background: none;
+  color: var(--text-muted);
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  cursor: pointer;
+  transition: background var(--t-base) var(--ease), color var(--t-base) var(--ease),
+    box-shadow var(--t-base) var(--ease);
+}
+
+.auth-tab:hover:not(.is-active) {
+  color: var(--text);
+}
+
+.auth-tab.is-active {
+  background: var(--surface);
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+}
+
+/* ---------- Encabezado ---------- */
+.auth-head {
+  margin-bottom: var(--sp-5);
+}
+
+.auth-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.auth-sub {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--fs-base);
+}
+
+.auth-form-wrap .form-alert {
+  margin-bottom: var(--sp-4);
+}
+
+/* ---------- Formulario ---------- */
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+}
+
+.auth-form .btn {
+  margin-top: var(--sp-2);
+}
+
+.auth-form .btn .spinner {
+  width: 16px;
+  height: 16px;
+}
+
+/* ---------- Pie del formulario ---------- */
+.auth-switch {
+  margin-top: var(--sp-6);
+  padding-top: var(--sp-5);
+  border-top: 1px solid var(--line);
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.auth-switch-btn {
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--brand-600);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-switch-btn:hover {
+  text-decoration: underline;
+}
+
+/* ---------- RESPONSIVE ---------- */
+
+/* Tablet: el panel de marca pasa a ser una banda superior compacta.
+   Se mantiene la propuesta porque sigue siendo legible en una línea. */
+@media (max-width: 940px) {
+  .auth {
+    grid-template-columns: 1fr;
+  }
+
+  .auth-aside {
+    min-height: 0;
+  }
+
+  .auth-aside-inner {
+    justify-content: flex-start;
+    gap: var(--sp-6);
+    padding: var(--sp-8) var(--sp-6);
+  }
+
+  .auth-pitch {
+    max-width: none;
+  }
+
+  .auth-pitch-title {
+    font-size: var(--fs-xl);
+    margin-bottom: var(--sp-4);
+  }
+
+  .auth-points {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: var(--sp-4) var(--sp-6);
+  }
+
+  .auth-points li {
+    font-size: var(--fs-sm);
+  }
+
+  .auth-panel {
+    padding: var(--sp-8) var(--sp-5) var(--sp-12);
+  }
+}
+
+/* Móvil: solo la marca, la propuesta estorba */
+@media (max-width: 620px) {
+  .auth-pitch {
+    display: none;
+  }
+
+  .auth-aside-inner {
+    padding: var(--sp-6) var(--sp-5);
+  }
+
+  .auth-form-wrap {
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 420px) {
+  .auth-brand-name {
+    font-size: var(--fs-lg);
+  }
+
+  .auth-logo {
+    width: 38px;
+    height: 38px;
+  }
+
+  .auth-panel {
+    padding: var(--sp-6) var(--sp-4) var(--sp-10);
+  }
+
+  .auth-aside-inner {
+    padding: var(--sp-5) var(--sp-4);
+  }
+}

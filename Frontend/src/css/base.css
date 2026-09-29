@@ -1,0 +1,780 @@
+/* ==============================================
+   PÉTALOS & ENCANTO — SISTEMA DE DISEÑO
+   Tokens, reset, tipografía, botones y formularios
+   ============================================== */
+
+/* ---------- TOKENS ---------- */
+:root {
+  /* Marca */
+  --brand-50: #fdf3f6;
+  --brand-100: #fbe5ec;
+  --brand-200: #f6ccdc;
+  --brand-300: #eaa3be;
+  --brand-400: #d4709a;
+  --brand-500: #c04d78;
+  --brand-600: #a83a63;
+  --brand-700: #8b2e51;
+  --brand-800: #6f2540;
+
+  /* Neutros cálidos */
+  --ink-900: #17130f;
+  --ink-800: #211b16;
+  --ink-700: #302822;
+  --ink-600: #4a4038;
+  --ink-500: #6b6058;
+  --ink-400: #8b8079;
+  --ink-300: #b3a9a1;
+  --ink-200: #ded7d1;
+  --ink-100: #efeae6;
+  --ink-50: #f8f6f4;
+
+  /* Superficies */
+  --canvas: #f6f3f1;
+  --surface: #ffffff;
+  --surface-alt: #fbf9f8;
+  --surface-sunken: #f1ede9;
+  --line: #e8e2dc;
+  --line-strong: #d5ccc4;
+
+  /* Texto */
+  --text: #1b1613;
+  --text-muted: #6b6058;
+  --text-subtle: #8b8079;
+  --text-inverse: #ffffff;
+  --text-inverse-muted: rgba(255, 255, 255, 0.72);
+
+  /* Semánticos */
+  --success: #157f4a;
+  --success-soft: #e6f4ec;
+  --danger: #c0392b;
+  --danger-soft: #fdecea;
+  --warning: #b26a00;
+  --warning-soft: #fdf3e3;
+  --info: #1f6f9c;
+  --info-soft: #e7f2f8;
+
+  /* Header */
+  --header-bg: #17130f;
+  --header-bg-alt: #211b16;
+  --header-line: rgba(255, 255, 255, 0.1);
+
+  /* Radios */
+  --r-xs: 4px;
+  --r-sm: 6px;
+  --r-md: 10px;
+  --r-lg: 14px;
+  --r-xl: 20px;
+  --r-full: 999px;
+
+  /* Sombras */
+  --shadow-xs: 0 1px 2px rgba(23, 19, 15, 0.05);
+  --shadow-sm: 0 1px 3px rgba(23, 19, 15, 0.07), 0 1px 2px rgba(23, 19, 15, 0.04);
+  --shadow-md: 0 4px 12px rgba(23, 19, 15, 0.07), 0 2px 4px rgba(23, 19, 15, 0.04);
+  --shadow-lg: 0 12px 32px rgba(23, 19, 15, 0.1), 0 4px 8px rgba(23, 19, 15, 0.04);
+  --shadow-brand: 0 6px 18px rgba(168, 58, 99, 0.26);
+
+  /* Espaciado (escala de 4px) */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 20px;
+  --sp-6: 24px;
+  --sp-8: 32px;
+  --sp-10: 40px;
+  --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* Tipografía */
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Fraunces', 'Iowan Old Style', Georgia, serif;
+  --font-mono: ui-monospace, 'SF Mono', 'Cascadia Code', Menlo, monospace;
+
+  --fs-xs: 0.75rem;
+  --fs-sm: 0.8125rem;
+  --fs-base: 0.9375rem;
+  --fs-md: 1rem;
+  --fs-lg: 1.125rem;
+  --fs-xl: 1.375rem;
+  --fs-2xl: 1.75rem;
+  --fs-3xl: 2.25rem;
+  --fs-4xl: 3rem;
+
+  /* Movimiento */
+  --t-fast: 120ms;
+  --t-base: 180ms;
+  --t-slow: 280ms;
+  --ease: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout */
+  --container: 1240px;
+  --header-h: 64px;
+}
+
+/* ---------- RESET ---------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--fs-base);
+  line-height: 1.55;
+  color: var(--text);
+  background: var(--canvas);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+#root {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+h1,
+h2,
+h3,
+h4 {
+  line-height: 1.2;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--brand-500);
+  outline-offset: 2px;
+  border-radius: var(--r-xs);
+}
+
+::selection {
+  background: var(--brand-200);
+  color: var(--brand-800);
+}
+
+/* ---------- LAYOUT HELPERS ---------- */
+.container {
+  width: 100%;
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+.page {
+  flex: 1;
+  padding-block: var(--sp-10) var(--sp-16);
+}
+
+.page-head {
+  margin-bottom: var(--sp-8);
+}
+
+.page-title {
+  font-family: var(--font-display);
+  font-size: var(--fs-2xl);
+  font-weight: 600;
+  color: var(--text);
+}
+
+.page-subtitle {
+  margin-top: var(--sp-2);
+  color: var(--text-muted);
+  font-size: var(--fs-md);
+}
+
+.eyebrow {
+  display: inline-block;
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--brand-600);
+}
+
+/* ---------- ANIMACIONES ---------- */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes dropIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ---------- BOTONES ---------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 10px 18px;
+  border: 1px solid transparent;
+  border-radius: var(--r-md);
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1.2;
+  white-space: nowrap;
+  cursor: pointer;
+  background: none;
+  transition: background var(--t-base) var(--ease), border-color var(--t-base) var(--ease),
+    color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease),
+    transform var(--t-fast) var(--ease);
+}
+
+.btn:active:not(:disabled) {
+  transform: translateY(1px);
+}
+
+.btn:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.btn .icon {
+  flex-shrink: 0;
+}
+
+.btn-primary {
+  background: var(--brand-600);
+  color: var(--text-inverse);
+  box-shadow: var(--shadow-brand);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--brand-700);
+}
+
+.btn-secondary {
+  background: var(--surface);
+  color: var(--text);
+  border-color: var(--line-strong);
+  box-shadow: var(--shadow-xs);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--ink-50);
+  border-color: var(--ink-300);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: var(--surface-sunken);
+  color: var(--text);
+}
+
+.btn-inverse {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-inverse);
+  border-color: var(--header-line);
+}
+
+.btn-inverse:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.18);
+}
+
+.btn-danger {
+  background: var(--danger);
+  color: var(--text-inverse);
+}
+
+.btn-danger:hover:not(:disabled) {
+  background: #a53125;
+}
+
+.btn-danger-soft {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.btn-danger-soft:hover:not(:disabled) {
+  background: #f9d9d5;
+}
+
+.btn-sm {
+  padding: 6px 12px;
+  font-size: var(--fs-sm);
+  border-radius: var(--r-sm);
+}
+
+.btn-lg {
+  padding: 13px 24px;
+  font-size: var(--fs-md);
+}
+
+.btn-block {
+  width: 100%;
+}
+
+/* ---------- TARJETAS ---------- */
+.card {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+}
+
+.card-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+  padding: var(--sp-5) var(--sp-6);
+  border-bottom: 1px solid var(--line);
+}
+
+.card-title {
+  font-size: var(--fs-lg);
+  font-weight: 600;
+}
+
+.card-body {
+  padding: var(--sp-6);
+}
+
+/* ---------- BADGES ---------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-1);
+  padding: 3px 9px;
+  border-radius: var(--r-full);
+  font-size: var(--fs-xs);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.badge-success {
+  background: var(--success-soft);
+  color: var(--success);
+}
+
+.badge-danger {
+  background: var(--danger-soft);
+  color: var(--danger);
+}
+
+.badge-neutral {
+  background: var(--surface-sunken);
+  color: var(--ink-600);
+}
+
+.badge-brand {
+  background: var(--brand-50);
+  color: var(--brand-700);
+}
+
+.badge-info {
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+}
+
+/* ---------- FORMULARIOS ---------- */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.label {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  color: var(--ink-600);
+}
+
+.input,
+.select,
+.textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  font-size: var(--fs-base);
+  color: var(--text);
+  transition: border-color var(--t-base) var(--ease), box-shadow var(--t-base) var(--ease);
+}
+
+.input::placeholder,
+.textarea::placeholder {
+  color: var(--ink-400);
+}
+
+.input:hover,
+.select:hover,
+.textarea:hover {
+  border-color: var(--ink-300);
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+  outline: none;
+  border-color: var(--brand-500);
+  box-shadow: 0 0 0 3px var(--brand-100);
+}
+
+.select {
+  appearance: none;
+  padding-right: 36px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%236b6058' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m6 9 6 6 6-6'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  cursor: pointer;
+}
+
+.form-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--sp-2);
+  padding: 10px 12px;
+  border-radius: var(--r-md);
+  font-size: var(--fs-sm);
+  background: var(--danger-soft);
+  color: var(--danger);
+  border: 1px solid #f5cdc7;
+}
+
+.form-alert-success {
+  background: var(--success-soft);
+  color: var(--success);
+  border-color: #c4e5d3;
+}
+
+/* ---------- PRECIO ---------- */
+.price {
+  font-family: var(--font-display);
+  font-size: var(--fs-xl);
+  font-weight: 600;
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
+.price-sm {
+  font-size: var(--fs-md);
+}
+
+/* ---------- UTILIDADES ---------- */
+.stack {
+  display: flex;
+  flex-direction: column;
+}
+
+.stack-3 { gap: var(--sp-3); }
+.stack-4 { gap: var(--sp-4); }
+.stack-6 { gap: var(--sp-6); }
+
+.row {
+  display: flex;
+  align-items: center;
+}
+
+.row-2 { gap: var(--sp-2); }
+
+.text-muted {
+  color: var(--text-muted);
+}
+
+.text-subtle {
+  color: var(--text-subtle);
+}
+
+.text-sm {
+  font-size: var(--fs-sm);
+}
+
+.text-xs {
+  font-size: var(--fs-xs);
+}
+
+.text-right {
+  text-align: right;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ---------- ICONOS ---------- */
+.icon {
+  display: inline-block;
+  vertical-align: middle;
+  flex-shrink: 0;
+  stroke: currentColor;
+  fill: none;
+  stroke-width: 1.75;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* ---------- BANDERAS ----------
+   Cada bandera conserva su proporción real (Canada, Inglaterra y Rusia
+   son 2:1; el resto 3:2), asi que se fija la altura y el ancho sale del
+   viewBox. El borde delineate las partes blancas, que si no se pierden
+   sobre un fondo claro. */
+.bandera {
+  display: block;
+  flex-shrink: 0;
+  height: 12px;
+  width: auto;
+  border: 1px solid var(--line);
+  border-radius: 2px;
+  background: var(--surface);
+}
+
+/* ---------- SPINNER ---------- */
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--line-strong);
+  border-top-color: var(--brand-500);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.spinner-inverse {
+  border-color: rgba(255, 255, 255, 0.35);
+  border-top-color: #fff;
+}
+
+/* ---------- RESPONSIVE ----------
+   Breakpoints usados en todo el proyecto:
+     900px  tablet horizontal / sidebar de admin
+     720px  header compacto
+     640px  tablet vertical
+     560px  móvil
+     420px  móvil pequeño
+   ------------------------------------ */
+
+/* Evita que cualquier elemento ancho desborde la pantalla.
+   `clip` en lugar de `hidden` a propósito: `hidden` convierte
+   el body en contenedor de scroll y rompería el header sticky
+   y el resumen del carrito. */
+body {
+  overflow-x: clip;
+}
+
+@supports not (overflow-x: clip) {
+  body {
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding-inline: var(--sp-5);
+  }
+
+  /* El header encoge, y con él el offset de los elementos sticky */
+  :root {
+    --header-h: 56px;
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-inline: var(--sp-4);
+  }
+
+  .page {
+    padding-block: var(--sp-6) var(--sp-10);
+  }
+
+  .page-head {
+    margin-bottom: var(--sp-5);
+  }
+
+  .page-title {
+    font-size: var(--fs-xl);
+  }
+
+  .page-subtitle {
+    font-size: var(--fs-base);
+  }
+
+  .card-pad,
+  .card-body {
+    padding: var(--sp-4);
+  }
+
+  /* El título y el badge/botón no caben en una línea en móvil */
+  .card-head {
+    flex-wrap: wrap;
+    gap: var(--sp-2);
+    padding: var(--sp-4);
+  }
+
+  /* ----------
+     iOS Safari hace zoom al enfocar un input con
+     fuente menor a 16px. Subir a 16px lo evita.
+     ---------- */
+  .input,
+  .select,
+  .textarea {
+    font-size: 16px;
+    padding: 11px 12px;
+  }
+
+  .select {
+    padding-right: 36px;
+  }
+
+  /* Áreas táctiles: 44px es el mínimo recomendado */
+  .btn {
+    min-height: 44px;
+    padding: 11px 18px;
+  }
+
+  .btn-sm {
+    min-height: 38px;
+    padding: 8px 13px;
+  }
+
+  .btn-lg {
+    min-height: 48px;
+  }
+
+  .qty-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  .cart-btn {
+    width: 42px;
+    height: 42px;
+  }
+
+  /* Los botones a lo ancho se leen mucho mejor con el pulgar */
+  .btn-block {
+    min-height: 48px;
+  }
+
+  .form-alert {
+    font-size: var(--fs-base);
+  }
+}
+
+@media (max-width: 420px) {
+  .container {
+    padding-inline: var(--sp-3);
+  }
+
+  .page-title {
+    font-size: var(--fs-lg);
+  }
+
+  .price {
+    font-size: var(--fs-lg);
+  }
+}
+
+/* ---------- PANTALLAS TÁCTILES ---------- */
+
+/* En pantallas táctiles no existe el hover, así que se evitan
+   los estados "pegados" que en escritorio acompañan al cursor */
+@media (hover: none) {
+  .prod-card:hover {
+    transform: none;
+    box-shadow: var(--shadow-xs);
+  }
+
+  .prod-card:hover .prod-img {
+    transform: none;
+  }
+
+  .table tbody tr:hover,
+  .cart-item:hover,
+  .cat-admin-item:hover {
+    background: transparent;
+  }
+}
+
+/* Respeto las muescas y la barra de gestos del iPhone */
+@supports (padding: max(0px)) {
+  @media (max-width: 900px) {
+    .site-header-inner {
+      padding-top: env(safe-area-inset-top);
+    }
+
+    .site-footer {
+      padding-bottom: env(safe-area-inset-bottom);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

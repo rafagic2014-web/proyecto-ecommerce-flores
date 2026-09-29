@@ -1,0 +1,120 @@
+/* ==============================================
+   PAGO — formulario + resumen del pedido
+   ============================================== */
+
+.pago-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+/* ---------- Encabezado de tarjeta ---------- */
+.card-head-icon {
+  color: var(--ink-400);
+}
+
+/* ---------- Grilla de formulario ---------- */
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+}
+
+.form-grid-full {
+  grid-column: 1 / -1;
+}
+
+.input-mono {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.04em;
+}
+
+/* ---------- Lista resumida ---------- */
+.mini-list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-3);
+  padding-bottom: var(--sp-4);
+  border-bottom: 1px solid var(--line);
+  max-height: 260px;
+  overflow-y: auto;
+}
+
+.mini-item {
+  display: grid;
+  grid-template-columns: 44px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-3);
+}
+
+.mini-img {
+  width: 44px;
+  height: 44px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  background: var(--surface-sunken);
+}
+
+.mini-info {
+  min-width: 0;
+}
+
+.mini-name {
+  font-size: var(--fs-sm);
+  font-weight: 500;
+  line-height: 1.3;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.mini-qty {
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+}
+
+.mini-price {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+/* ---------- Nota de seguridad ---------- */
+.pago-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 6px;
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+  line-height: 1.5;
+}
+
+.pago-note .icon {
+  margin-top: 2px;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 980px) {
+  .pago-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* En móvil la lista del pedido no necesita scroll propio:
+     solo genera un scroll anidado incómodo dentro de la página */
+  .mini-list {
+    max-height: none;
+    overflow-y: visible;
+  }
+
+  .pago-note {
+    font-size: var(--fs-sm);
+  }
+}

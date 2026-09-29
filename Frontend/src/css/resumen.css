@@ -1,0 +1,234 @@
+/* ==============================================
+   RESUMEN — confirmación de compra
+   ============================================== */
+
+.resumen-wrap {
+  max-width: 760px;
+}
+
+/* ---------- Confirmación ---------- */
+.done-head {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--sp-3);
+  margin-bottom: var(--sp-8);
+  text-align: center;
+  animation: riseIn var(--t-slow) var(--ease-out) both;
+}
+
+.done-check {
+  display: grid;
+  place-items: center;
+  width: 60px;
+  height: 60px;
+  margin-bottom: var(--sp-2);
+  border-radius: var(--r-full);
+  background: var(--success-soft);
+  color: var(--success);
+  box-shadow: 0 0 0 8px rgba(21, 127, 74, 0.08);
+}
+
+.done-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.75rem, 4vw, 2.25rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.done-text {
+  max-width: 52ch;
+  color: var(--text-muted);
+  line-height: 1.6;
+}
+
+.done-order {
+  margin-top: var(--sp-2);
+  font-family: var(--font-mono);
+  letter-spacing: 0.05em;
+}
+
+/* ---------- Recibo ---------- */
+.done-card {
+  margin-bottom: var(--sp-6);
+}
+
+.done-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+.done-block + .done-block {
+  padding-top: var(--sp-6);
+  border-top: 1px solid var(--line);
+}
+
+.done-block-title {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: var(--sp-4);
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--text-subtle);
+}
+
+.done-block-title .icon {
+  color: var(--brand-500);
+}
+
+/* Datos del cliente */
+.done-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--sp-4);
+  margin: 0;
+}
+
+.done-field-full {
+  grid-column: 1 / -1;
+}
+
+.done-field dt {
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+  margin-bottom: 2px;
+}
+
+.done-field dd {
+  margin: 0;
+  font-size: var(--fs-base);
+  font-weight: 500;
+}
+
+/* Pais de entrega: bandera y nombre en linea */
+.done-pais {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+/* Productos */
+.done-items {
+  display: flex;
+  flex-direction: column;
+}
+
+.done-item {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--sp-3);
+  padding-block: var(--sp-3);
+  border-bottom: 1px solid var(--line);
+}
+
+.done-item:last-child {
+  border-bottom: 0;
+}
+
+.done-img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: var(--r-sm);
+  background: var(--surface-sunken);
+}
+
+.done-item-info {
+  min-width: 0;
+}
+
+.done-item-name {
+  font-size: var(--fs-base);
+  font-weight: 500;
+  line-height: 1.3;
+}
+
+.done-item-qty {
+  font-size: var(--fs-sm);
+  color: var(--text-subtle);
+}
+
+.done-item-total {
+  font-size: var(--fs-sm);
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.done-total {
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- Acciones ---------- */
+.done-actions {
+  display: flex;
+  justify-content: center;
+  gap: var(--sp-3);
+  flex-wrap: wrap;
+}
+
+/* ---------- Impresión ---------- */
+@media print {
+  .site-header,
+  .site-footer,
+  .done-actions,
+  .done-head .done-text {
+    display: none !important;
+  }
+
+  body {
+    background: #fff;
+  }
+
+  .done-card,
+  .done-check {
+    box-shadow: none;
+    border-color: #ccc;
+  }
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 560px) {
+  .done-list {
+    grid-template-columns: 1fr;
+  }
+
+  .done-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+  }
+
+  .done-item-total {
+    grid-column: 2;
+  }
+
+  .done-actions .btn {
+    width: 100%;
+  }
+
+  .done-check {
+    width: 52px;
+    height: 52px;
+  }
+
+  .done-body {
+    gap: var(--sp-5);
+  }
+
+  .done-block + .done-block {
+    padding-top: var(--sp-5);
+  }
+}
+
+@media (max-width: 420px) {
+  .done-head {
+    margin-bottom: var(--sp-6);
+  }
+
+  .done-order {
+    font-size: var(--fs-sm);
+  }
+}

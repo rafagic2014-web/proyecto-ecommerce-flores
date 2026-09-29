@@ -1,0 +1,250 @@
+/* ==============================================
+   CARRITO — items + resumen
+   ============================================== */
+
+.cart-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: var(--sp-6);
+  align-items: start;
+}
+
+/* ---------- LISTA ---------- */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.cart-item {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: var(--sp-4);
+  padding: var(--sp-4) var(--sp-6);
+  border-bottom: 1px solid var(--line);
+  transition: background var(--t-base) var(--ease);
+}
+
+.cart-item:last-child {
+  border-bottom: 0;
+}
+
+.cart-item:hover {
+  background: var(--surface-alt);
+}
+
+.cart-img {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: var(--r-md);
+  background: var(--surface-sunken);
+}
+
+.cart-info {
+  min-width: 0;
+}
+
+.cart-name {
+  font-size: var(--fs-md);
+  font-weight: 600;
+  line-height: 1.3;
+  margin-bottom: 2px;
+}
+
+.cart-unit {
+  font-size: var(--fs-sm);
+  color: var(--text-muted);
+}
+
+.cart-stock {
+  margin-top: 2px;
+  font-size: var(--fs-xs);
+  color: var(--text-subtle);
+}
+
+/* ---------- CANTIDAD ---------- */
+.cart-qty {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  align-items: flex-start;
+}
+
+.cart-qty-label {
+  font-size: var(--fs-xs);
+  font-weight: 500;
+  color: var(--text-subtle);
+}
+
+.qty {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: var(--surface);
+}
+
+.qty-btn {
+  display: grid;
+  place-items: center;
+  width: 30px;
+  height: 30px;
+  border: 0;
+  background: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--t-fast) var(--ease), color var(--t-fast) var(--ease);
+}
+
+.qty-btn:hover:not(:disabled) {
+  background: var(--surface-sunken);
+  color: var(--text);
+}
+
+.qty-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+.qty-value {
+  min-width: 30px;
+  text-align: center;
+  font-size: var(--fs-sm);
+  font-weight: 600;
+}
+
+/* ---------- TOTAL DE LÍNEA ---------- */
+.cart-line {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+}
+
+.cart-remove {
+  color: var(--ink-400);
+}
+
+.cart-remove:hover {
+  color: var(--danger);
+  background: var(--danger-soft);
+}
+
+/* ---------- RESUMEN ---------- */
+.cart-summary {
+  position: sticky;
+  top: calc(var(--header-h) + var(--sp-5));
+}
+
+.sum-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  font-size: var(--fs-base);
+}
+
+.sum-hint {
+  padding: 8px 10px;
+  border-radius: var(--r-md);
+  background: var(--brand-50);
+  color: var(--brand-700);
+  font-size: var(--fs-sm);
+}
+
+.sum-total {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--sp-3);
+  padding-top: var(--sp-4);
+  border-top: 1px solid var(--line);
+  font-weight: 600;
+}
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 900px) {
+  .cart-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .cart-summary {
+    position: static;
+  }
+}
+
+@media (max-width: 640px) {
+  .cart-item {
+    grid-template-columns: 72px minmax(0, 1fr) auto;
+    grid-template-areas:
+      'img info line'
+      'img qty  qty';
+    gap: var(--sp-3);
+    padding: var(--sp-4);
+  }
+
+  .cart-img {
+    grid-area: img;
+    width: 72px;
+    height: 72px;
+  }
+
+  .cart-info {
+    grid-area: info;
+  }
+
+  .cart-qty {
+    grid-area: qty;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--sp-2);
+  }
+
+  .cart-line {
+    grid-area: line;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 2px;
+  }
+}
+
+/* Móvil pequeño: la imagen estorba en una sola columna,
+   el nombre y el importe manda */
+@media (max-width: 460px) {
+  .cart-item {
+    grid-template-columns: 56px minmax(0, 1fr);
+    grid-template-areas:
+      'img info'
+      'qty  qty'
+      'line line';
+    row-gap: var(--sp-3);
+  }
+
+  .cart-img {
+    width: 56px;
+    height: 56px;
+  }
+
+  .cart-line {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: var(--sp-2);
+    border-top: 1px solid var(--line);
+  }
+
+  .cart-qty-label {
+    display: none;
+  }
+
+  .qty-btn {
+    width: 40px;
+    height: 40px;
+  }
+
+  .qty-value {
+    min-width: 36px;
+    font-size: var(--fs-base);
+  }
+}
