@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
+    "test:reporte": "jest --json --outputFile=reporte.json",
+    "test:consola": "node ./scripts/generar_resultado_consola.js",
     "start": "node src/server_express.js",
     "dev": "node --watch src/server_express.js"
   },

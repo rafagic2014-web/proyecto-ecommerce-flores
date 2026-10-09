@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Tests Productos Controller</title>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <header>
+    <h1>CONNECT_BY_GZG_// PRODUCTOS CONTROLLER</h1>
+    <div class="status-online">ESTADO: EN LÍNEA</div>
+  </header>
+
+  <!-- Fuente de datos viva: jest --json --outputFile=reporte.json -->
+  <div class="fuente-bar">
+    <span id="estado-carga">// INICIANDO ..._</span>
+    <span id="kpi-fuente">FUENTE: reporte.json</span>
+    <span id="kpi-fuente-consola">FUENTE: resultado_consola.json</span>
+  </div>
+
+  <div class="kpi-container">
+    <div class="kpi-card">
+      <span>Suites Analizadas</span>
+      <h2 id="kpi-suites">-- / --</h2>
+      <div class="mini-row">
+        <div id="mini-suites-donut" class="mini-donut" role="img" aria-label="Cobertura de suites">
+          <div class="mini-donut-centro"><span id="mini-suites-centro">--</span></div>
+        </div>
+        <div id="mini-suites-list" class="mini-list"></div>
+      </div>
+      <p class="kpi-sub" id="kpi-suites-sub">// --</p>
+    </div>
+    <div class="kpi-card">
+      <span>Total Pruebas</span>
+      <h2 id="kpi-total">-- / --</h2>
+      <div class="pie-wrap">
+        <div id="pie-total" class="pie-360" role="img" aria-label="Gráfico circular de pruebas">
+          <div class="pie-centro"><span id="pie-porcentaje">--%</span></div>
+        </div>
+        <div class="pie-leyenda">
+          <div><i class="dot dot-pass"></i>PASS <b id="pie-pass">--</b></div>
+          <div><i class="dot dot-fail"></i>FAIL <b id="pie-fail">--</b></div>
+        </div>
+      </div>
+    </div>
+    <div class="kpi-card orange">
+      <span>Anomalías Detectadas</span>
+      <h2 id="kpi-fallos">--</h2>
+      <div id="mini-fallos" class="mini-stack" role="img" aria-label="Anomalías por severidad"></div>
+      <div id="leyenda-fallos" class="mini-leyenda"></div>
+      <p class="kpi-sub" id="kpi-fallos-sub">// --</p>
+    </div>
+    <div class="kpi-card">
+      <span>Tiempo de Ejecución</span>
+      <h2 id="kpi-tiempo">--</h2>
+      <div id="mini-tiempo" class="mini-spark" role="img" aria-label="Tiempo por suite"></div>
+      <p class="kpi-sub" id="kpi-tiempo-sub">// --</p>
+    </div>
+  </div>
+
+  <div class="barra-exito-container">
+    <div class="barra-exito"><div id="barra-fill"></div></div>
+    <div id="barra-label">TASA DE ÉXITO: --</div>
+  </div>
+
+  <!-- Panel analítico: gráficos estadísticos dinámicos -->
+  <section class="charts-grid">
+    <div class="chart-panel">
+      <h3>▚ TESTS POR SUITE</h3>
+      <p class="chart-sub" id="stat-suites-sub">// --</p>
+      <div id="chart-suites" class="vbars"></div>
+    </div>
+    <div class="chart-panel">
+      <h3>◉ CÓDIGOS HTTP REALES</h3>
+      <p class="chart-sub" id="stat-http-sub">// --</p>
+      <div class="donut-row">
+        <div id="donut-http" class="donut" role="img" aria-label="Distribución de códigos HTTP">
+          <div class="donut-centro"><span id="donut-http-centro">--</span></div>
+        </div>
+        <div id="leyenda-http" class="leyenda"></div>
+      </div>
+    </div>
+    <div class="chart-panel">
+      <h3>▞ TIEMPO POR SUITE (ms)</h3>
+      <p class="chart-sub" id="stat-tiempo-sub">// --</p>
+      <div id="chart-tiempo" class="hbars"></div>
+    </div>
+    <div class="chart-panel">
+      <h3>◉ COBERTURA BD REAL (dbCalls)</h3>
+      <p class="chart-sub" id="stat-db-sub">// 0 = validación frena antes de BD</p>
+      <div class="donut-row">
+        <div id="donut-db" class="donut" role="img" aria-label="Cobertura de base de datos">
+          <div class="donut-centro"><span id="donut-db-centro">--</span></div>
+        </div>
+        <div id="leyenda-db" class="leyenda"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Toolbar: filtros + recarga + carga manual (para file://) -->
+  <div class="toolbar">
+    <input id="filtro-texto" type="text" placeholder="FILTRAR_ ej: STK-11, stock, 404, categoría...">
+    <select id="filtro-suite">
+      <option value="todas">TODAS LAS SUITES</option>
+    </select>
+    <select id="filtro-estado">
+      <option value="todos">TODOS LOS ESTADOS</option>
+      <option value="passed">PASS</option>
+      <option value="failed">FAIL</option>
+    </select>
+    <button id="btn-recargar" type="button">⟳ RECARGAR</button>
+    <label class="btn-file" for="input-reporte">⇪ CARGAR reporte.json</label>
+    <input id="input-reporte" type="file" accept=".json,application/json" hidden>
+    <label class="btn-file" for="input-consola">⇪ CARGAR RESULTADO_CONSOLA.json</label>
+    <input id="input-consola" type="file" accept=".json,application/json" hidden>
+  </div>
+
+  <section class="table-section">
+    <div class="table-head">
+      <h3>▤ SUITE DE CASOS // PRODUCTOS CONTROLLER</h3>
+      <span id="contador-filas">MOSTRANDO -- / -- CASOS</span>
+    </div>
+    <div class="table-container table-spacious">
+    <table>
+      <thead>
+        <tr>
+          <th>CASO</th>
+          <th>ESTADO</th>
+          <th>LOG_OUTPUT</th>
+          <th>RESULTADO</th>
+          <th>DETALLE</th>
+        </tr>
+      </thead>
+      <tbody id="tabla-body">
+        <!-- Generado dinámicamente por app.js desde reporte.json + datos_de_test.html -->
+      </tbody>
+    </table>
+    </div>
+  </section>
+
+  <footer>
+    <p>Dashboard de Pruebas Unitarias para PRODUCTOS CONTROLLER</p>
+    <p>© 2026 CONNECT_BY_GZG_ </p>
+  </footer>
+
+  <!-- Enlace al archivo JavaScript -->
+  <script src="app.js"></script>
+</body>
+</html>

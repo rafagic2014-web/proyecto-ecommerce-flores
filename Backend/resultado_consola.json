@@ -1,0 +1,213 @@
+{
+  "generado": "2026-10-09T21:33:48.249Z",
+  "fuente": "jest --runInBand --verbose (stdout real, misma corrida que reporte.json)",
+  "totalBloques": 34,
+  "totalMapeados": 34,
+  "sinMapear": 0,
+  "casos": {
+    "descontarStock.test.js::Debe retornar 400 con id negativo": {
+      "etiqueta": "[TEST] descontarStock - ID negativo (400)",
+      "input": "Input: req.body = {\"id\":-1,\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":-1,\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con id cero": {
+      "etiqueta": "[TEST] descontarStock - ID cero (400)",
+      "input": "Input: req.body = {\"id\":0,\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":0,\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con id flotante": {
+      "etiqueta": "[TEST] descontarStock - ID flotante (400)",
+      "input": "Input: req.body = {\"id\":1.5,\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":1.5,\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con id no numérico": {
+      "etiqueta": "[TEST] descontarStock - ID no numérico (400)",
+      "input": "Input: req.body = {\"id\":\"abc\",\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":\"abc\",\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con id null": {
+      "etiqueta": "[TEST] descontarStock - ID null (400)",
+      "input": "Input: req.body = {\"id\":null,\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":null,\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con id undefined": {
+      "etiqueta": "[TEST] descontarStock - ID undefined (400)",
+      "input": "Input: req.body = {\"cantidad\":5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"cantidad\":5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Producto inválido\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Producto inválido\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con cantidad negativa": {
+      "etiqueta": "[TEST] descontarStock - Cantidad negativa (400)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":-5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":-5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Cantidad inválida\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Cantidad inválida\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con cantidad cero": {
+      "etiqueta": "[TEST] descontarStock - Cantidad cero (400)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":0}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":0}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Cantidad inválida\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Cantidad inválida\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con cantidad decimal": {
+      "etiqueta": "[TEST] descontarStock - Cantidad decimal (400)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":2.5}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":2.5}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Cantidad inválida\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Cantidad inválida\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 con cantidad no numérica": {
+      "etiqueta": "[TEST] descontarStock - Cantidad no numérica (400)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":\"abc\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":\"abc\"}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Cantidad inválida\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Cantidad inválida\"}"
+    },
+    "descontarStock.test.js::Debe parsear strings numéricos y descontar stock con éxito": {
+      "etiqueta": "[TEST] descontarStock - Éxito (strings numéricos)",
+      "input": "Input: req.body = {\"id\":\"10\",\"cantidad\":\"3\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":\"10\",\"cantidad\":\"3\"}} | res.status: [] | res.json: [[{\"mensaje\":\"Stock actualizado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Stock actualizado\"}"
+    },
+    "descontarStock.test.js::Debe retornar 400 si el stock es insuficiente o el producto está inactivo": {
+      "etiqueta": "[TEST] descontarStock - Stock insuficiente (400)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":500}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":500}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Stock insuficiente o producto no disponible\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Stock insuficiente o producto no disponible\"}"
+    },
+    "descontarStock.test.js::Debe retornar 500 ante error de base de datos": {
+      "etiqueta": "[TEST] descontarStock - Error BD (500)",
+      "input": "Input: req.body = {\"id\":10,\"cantidad\":2}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"id\":10,\"cantidad\":2}} | res.status: [[500]] | res.json: [[{\"error\":\"Error SQL al descontar stock\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error SQL al descontar stock\"}"
+    },
+    "activarProducto.test.js::Debe reactivar el producto exitosamente": {
+      "etiqueta": "[TEST] activarProducto - Éxito",
+      "input": "Input: req.params = {\"id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"5\"},\"body\":{}} | res.status: [] | res.json: [[{\"mensaje\":\"Producto reactivado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Producto reactivado\"}"
+    },
+    "activarProducto.test.js::Debe retornar 404 si el producto a reactivar no existe": {
+      "etiqueta": "[TEST] activarProducto - No existe (404)",
+      "input": "Input: req.params = {\"id\":\"99\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"99\"},\"body\":{}} | res.status: [[404]] | res.json: [[{\"mensaje\":\"Producto no existe\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(404), res.json = {\"mensaje\":\"Producto no existe\"}"
+    },
+    "activarProducto.test.js::Debe retornar 500 si falla la consulta SQL": {
+      "etiqueta": "[TEST] activarProducto - Error BD (500)",
+      "input": "Input: req.params = {\"id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"5\"},\"body\":{}} | res.status: [[500]] | res.json: [[{\"error\":\"Error al reactivar producto\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error al reactivar producto\"}"
+    },
+    "updateProducto.test.js::Debe convertir categoria_id vacía (\"\") o undefined a null": {
+      "etiqueta": "[TEST] updateProducto - categoria_id vacío a null",
+      "input": "Input: req.params = {\"id\":\"1\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"1\"},\"body\":{\"nombre\":\"Laptop\",\"categoria_id\":\"\"}} | res.status: [] | res.json: [[{\"mensaje\":\"Producto actualizado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Producto actualizado\"}"
+    },
+    "updateProducto.test.js::Debe actualizar el producto correctamente cuando existe": {
+      "etiqueta": "[TEST] updateProducto - Éxito",
+      "input": "Input: req.params = {\"id\":\"1\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"1\"},\"body\":{\"nombre\":\"Laptop Pro\",\"precio\":1200,\"categoria_id\":3}} | res.status: [] | res.json: [[{\"mensaje\":\"Producto actualizado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Producto actualizado\"}"
+    },
+    "updateProducto.test.js::Debe retornar 404 si el producto no existe (affectedRows === 0)": {
+      "etiqueta": "[TEST] updateProducto - No existe (404)",
+      "input": "Input: req.params = {\"id\":\"99\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"99\"},\"body\":{\"nombre\":\"Inexistente\"}} | res.status: [[404]] | res.json: [[{\"mensaje\":\"Producto no existe\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(404), res.json = {\"mensaje\":\"Producto no existe\"}"
+    },
+    "updateProducto.test.js::Debe retornar 500 ante fallo en la BD": {
+      "etiqueta": "[TEST] updateProducto - Error BD (500)",
+      "input": "Input: req.params = {\"id\":\"1\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"1\"},\"body\":{\"nombre\":\"Laptop Pro\"}} | res.status: [[500]] | res.json: [[{\"error\":\"Error al actualizar\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error al actualizar\"}"
+    },
+    "getProductosPorCategoria.test.js::Debe filtrar productos pasando categoria_id correctamente": {
+      "etiqueta": "[TEST] getProductosPorCategoria - Éxito",
+      "input": "Input: req.params = {\"categoria_id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"categoria_id\":\"5\"},\"body\":{}} | res.status: [] | res.json: [[[{\"id\":10,\"nombre\":\"Teclado\",\"categoria_id\":5}]]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = [{\"id\":10,\"nombre\":\"Teclado\",\"categoria_id\":5}]"
+    },
+    "getProductosPorCategoria.test.js::Debe retornar 500 si falla la consulta por categoría": {
+      "etiqueta": "[TEST] getProductosPorCategoria - Error BD (500)",
+      "input": "Input: req.params = {\"categoria_id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"categoria_id\":\"5\"},\"body\":{}} | res.status: [[500]] | res.json: [[{\"error\":\"Error al filtrar por categoría\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error al filtrar por categoría\"}"
+    },
+    "getProductosPorCategoria.test.js::Debe retornar array vacío si la categoría no tiene productos": {
+      "etiqueta": "[TEST] getProductosPorCategoria - Sin productos (200)",
+      "input": "Input: req.params = {\"categoria_id\":\"99\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"categoria_id\":\"99\"},\"body\":{}} | res.status: [] | res.json: [[[]]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = []"
+    },
+    "createProducto.test.js::Debe retornar 400 si falta el nombre": {
+      "etiqueta": "[TEST] createProducto - Falta nombre (400)",
+      "input": "Input: req.body = {\"descripcion\":\"Mouse óptico\",\"precio\":15}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"descripcion\":\"Mouse óptico\",\"precio\":15}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Nombre y precio son obligatorios\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Nombre y precio son obligatorios\"}"
+    },
+    "createProducto.test.js::Debe retornar 400 si falta el precio": {
+      "etiqueta": "[TEST] createProducto - Falta precio (400)",
+      "input": "Input: req.body = {\"nombre\":\"Mouse óptico\",\"descripcion\":\"Inalámbrico\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"nombre\":\"Mouse óptico\",\"descripcion\":\"Inalámbrico\"}} | res.status: [[400]] | res.json: [[{\"mensaje\":\"Nombre y precio son obligatorios\"}]] | dbCalls: 0",
+      "output": "✓ POSITIVO - Output: res.status(400), res.json = {\"mensaje\":\"Nombre y precio son obligatorios\"}"
+    },
+    "createProducto.test.js::Debe crear el producto correctamente cuando los datos son válidos": {
+      "etiqueta": "[TEST] createProducto - Éxito",
+      "input": "Input: req.body = {\"nombre\":\"Monitor 24\\\"\",\"descripcion\":\"Full HD\",\"precio\":150,\"stock\":10,\"imagen\":\"monitor.jpg\",\"categoria_id\":2}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"nombre\":\"Monitor 24\\\"\",\"descripcion\":\"Full HD\",\"precio\":150,\"stock\":10,\"imagen\":\"monitor.jpg\",\"categoria_id\":2}} | res.status: [] | res.json: [[{\"mensaje\":\"Producto creado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Producto creado\"}"
+    },
+    "createProducto.test.js::Debe retornar 500 si la inserción en BD falla": {
+      "etiqueta": "[TEST] createProducto - Error BD (500)",
+      "input": "Input: req.body = {\"nombre\":\"Silla Gamer\",\"precio\":200}",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{\"nombre\":\"Silla Gamer\",\"precio\":200}} | res.status: [[500]] | res.json: [[{\"error\":\"Error de inserción\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error de inserción\"}"
+    },
+    "getProductos.test.js::Debe retornar la lista de productos activos con respuesta 200": {
+      "etiqueta": "[TEST] getProductos - Éxito",
+      "input": "",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{}} | res.status: [] | res.json: [[[{\"id\":1,\"nombre\":\"Producto A\",\"estado_activo\":true},{\"id\":2,\"nombre\":\"Producto B\",\"estado_activo\":true}]]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = [{\"id\":1,\"nombre\":\"Producto A\",\"estado_activo\":true},{\"id\":2,\"nombre\":\"Producto B\",\"estado_activo\":true}]"
+    },
+    "getProductos.test.js::Debe retornar 500 si ocurre un error en la BD": {
+      "etiqueta": "[TEST] getProductos - Error BD (500)",
+      "input": "",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{}} | res.status: [[500]] | res.json: [[{\"error\":\"Error de conexión a BD\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error de conexión a BD\"}"
+    },
+    "deleteProducto.test.js::Debe desactivar el producto exitosamente (soft delete)": {
+      "etiqueta": "[TEST] deleteProducto - Éxito (soft delete)",
+      "input": "Input: req.params = {\"id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"5\"},\"body\":{}} | res.status: [] | res.json: [[{\"mensaje\":\"Producto desactivado\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = {\"mensaje\":\"Producto desactivado\"}"
+    },
+    "deleteProducto.test.js::Debe retornar 404 si el producto a eliminar no existe": {
+      "etiqueta": "[TEST] deleteProducto - No existe (404)",
+      "input": "Input: req.params = {\"id\":\"99\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"99\"},\"body\":{}} | res.status: [[404]] | res.json: [[{\"mensaje\":\"Producto no existe\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(404), res.json = {\"mensaje\":\"Producto no existe\"}"
+    },
+    "deleteProducto.test.js::Debe retornar 500 si falla la consulta SQL": {
+      "etiqueta": "[TEST] deleteProducto - Error BD (500)",
+      "input": "Input: req.params = {\"id\":\"5\"}",
+      "variables": "Variables evaluadas -> req: {\"params\":{\"id\":\"5\"},\"body\":{}} | res.status: [[500]] | res.json: [[{\"error\":\"Error de desactivación\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Error de desactivación\"}"
+    },
+    "getTodosProductos.test.js::Debe retornar todos los productos (activos e inactivos)": {
+      "etiqueta": "[TEST] getTodosProductos - Éxito",
+      "input": "",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{}} | res.status: [] | res.json: [[[{\"id\":1,\"nombre\":\"Producto A\",\"estado_activo\":true},{\"id\":2,\"nombre\":\"Producto B\",\"estado_activo\":false}]]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.json = [{\"id\":1,\"nombre\":\"Producto A\",\"estado_activo\":true},{\"id\":2,\"nombre\":\"Producto B\",\"estado_activo\":false}]"
+    },
+    "getTodosProductos.test.js::Debe retornar 500 si la base de datos falla": {
+      "etiqueta": "[TEST] getTodosProductos - Error BD (500)",
+      "input": "",
+      "variables": "Variables evaluadas -> req: {\"params\":{},\"body\":{}} | res.status: [[500]] | res.json: [[{\"error\":\"Fallo en la consulta SQL\"}]] | dbCalls: 1",
+      "output": "✓ POSITIVO - Output: res.status(500), res.json = {\"error\":\"Fallo en la consulta SQL\"}"
+    }
+  }
+}
