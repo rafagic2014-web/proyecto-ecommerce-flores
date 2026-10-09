@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "test": "jest",
     "start": "node src/server_express.js",
     "dev": "node --watch src/server_express.js"
   },
@@ -19,5 +20,8 @@
     "jsonwebtoken": "^9.0.3",
     "morgan": "^1.11.0",
     "mysql2": "^3.22.5"
+  },
+  "devDependencies": {
+    "jest": "^30.5.2"
   }
 }
