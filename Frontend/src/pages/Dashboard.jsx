@@ -55,6 +55,7 @@ export default function Dashboard() {
       }
 
       if (resCategorias.status === 'fulfilled') {
+       
         setCategorias((resCategorias.value.data || []).filter((c) => c.estado_activo === 1));
       } else {
         // Sin categorías el catálogo igual se muestra completo
