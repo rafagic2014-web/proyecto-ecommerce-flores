@@ -22,12 +22,14 @@ const authRoutes = require('./routes/auth');
 const productosRoutes = require('./routes/productos');
 const categoriasRoutes = require('./routes/categorias');
 const pedidosRoutes = require('./routes/pedidos');
+const testsRoutes = require('./routes/tests');
 
 // rutas
 app.use('/api/auth', authRoutes);
 app.use('/api/productos', productosRoutes);
 app.use('/api/categorias', categoriasRoutes);
 app.use('/api/pedidos', pedidosRoutes);
+app.use('/api/tests', testsRoutes);
 
 // ruta inexistente: se responde en JSON para que el frontend
 // pueda leer res.data.mensaje en vez de recibir HTML
