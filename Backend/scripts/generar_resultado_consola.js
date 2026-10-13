@@ -1,12 +1,3 @@
-/* Genera artefactos reales de consola para el dashboard:
- *  1) Corre jest --runInBand (orden determinista) capturando stdout/stderr
- *     + --json --outputFile=reporte.json (misma corrida => reporte + consola alineados)
- *  2) Guarda el log crudo en Backend/reporte_consola.log
- *  3) Parsea bloques [TEST] en orden y los alinea con reporte.json
- *     (bloque N de la suite F <=> assertion N de la suite F)
- *  4) Escribe Backend/resultado_consola.json que el dashboard consume dinámico
- * Uso: npm run test:consola
- */
 const { spawnSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
