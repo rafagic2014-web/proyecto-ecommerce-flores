@@ -1,14 +1,9 @@
 const connection = require('../bd/connections');
 const { TASAS, tasaDe, calcularTotales } = require('../lib/moneda');
 
-// El pool es de callbacks, así que la conexión exclusiva de la
-// transacción se pide por su interfaz con promesas.
-const pool = connection.promise();
-
 /**
  * Error de negocio: algo que el usuario puede corregir
  * (no queda stock, el producto no existe, el carrito está vacío).
- * Se traduce a un 400 legible en vez de un 500 con detalle de SQL.
  */
 class ErrorNegocio extends Error {
   constructor(mensaje) {
@@ -33,43 +28,32 @@ const leerLinea = (item) => {
   return { id, cantidad };
 };
 
-/**
- * CREAR PEDIDO (TODO EN UNA TRANSACCIÓN)
- * Todo ocurre en una transacción: se bloquean las filas con FOR UPDATE,
- * se valida, se inserta el pedido con su detalle y se descuenta. Si algo
- * falla, ROLLBACK deja la base exactamente como estaba.
- */
 const crearPedido = async (req, res) => {
   const usuarioId = Number(req.user?.id);
   const cliente = req.body?.cliente || {};
   const items = Array.isArray(req.body?.items) ? req.body.items : [];
 
   if (!usuarioId) {
- return res.status(401).json({ mensaje: 'Sesión no válida' });
+    return res.status(401).json({ mensaje: 'Sesión no válida' });
   }
 
   if (items.length === 0) {
- return res.status(400).json({ mensaje: 'El pedido está vacío' });
+    return res.status(400).json({ mensaje: 'El pedido está vacío' });
   }
 
-  // El total NUNCA se toma del cliente: se recalcula aquí con los precios
-  // de la base. Solo se acepta la moneda, y solo si está en la tabla.
   const moneda = TASAS[cliente.moneda] ? cliente.moneda : 'USD';
-
+  
+  // Obtenemos el pool de promesas de forma dinámica en tiempo de ejecución
+  const pool = connection.promise();
   let conn;
 
   try {
-    // La validación de forma va dentro del try: si una cantidad llega
-    // mal formada, su ErrorNegocio debe terminar en un 400 legible y no
-    // escaparse como un 500.
     const lineas = items.map(leerLinea);
     const tasa = tasaDe(moneda);
 
     conn = await pool.getConnection();
-
     await conn.beginTransaction();
 
-    // 1) Bloquear y validar cada producto antes de tocar nada.
     const productos = [];
 
     for (const linea of lineas) {
@@ -82,28 +66,26 @@ const crearPedido = async (req, res) => {
       );
 
       if (rows.length === 0) {
- throw new ErrorNegocio(`El producto ${linea.id} ya no existe`);
+        throw new ErrorNegocio(`El producto ${linea.id} ya no existe`);
       }
 
       const p = rows[0];
 
       if (!p.estado_activo) {
- throw new ErrorNegocio(`"${p.nombre}" ya no está disponible`);
+        throw new ErrorNegocio(`"${p.nombre}" ya no está disponible`);
       }
 
       if (Number(p.stock) < linea.cantidad) {
         throw new ErrorNegocio(
- `Stock insuficiente de "${p.nombre}": quedan ${p.stock} y pediste ${linea.cantidad}`
+          `Stock insuficiente de "${p.nombre}": quedan ${p.stock} y pediste ${linea.cantidad}`
         );
       }
 
       productos.push({ ...p, cantidad: linea.cantidad });
     }
 
-    // 2) Total recalculado en el servidor.
     const { subtotal, envio, total } = calcularTotales(productos, moneda);
 
-    // 3) Cabecera del pedido con los datos de facturación.
     const [pedido] = await conn.query(
       `INSERT INTO pedidos
          (usuario_id, total, cedula, nombre_cliente, direccion, pais, moneda)
@@ -119,9 +101,6 @@ const crearPedido = async (req, res) => {
       ]
     );
 
-    // 4) Detalle del pedido.
-    //    `precio` guarda el precio base del catálogo y `subtotal` lo que se
-    //    cobró por esa línea, ya convertido a la moneda del pago.
     for (const p of productos) {
       await conn.query(
         `INSERT INTO pedido_detalle
@@ -138,9 +117,6 @@ const crearPedido = async (req, res) => {
       );
     }
 
-    // 5) Descontar stock. El `stock >= ?` es una segunda barrera: si otra
-    //    compra entró entre la validación y aquí, affectedRows será 0 y
-    //    la transacción se deshace entera.
     for (const p of productos) {
       const [r] = await conn.query(
         `UPDATE productos
@@ -150,14 +126,14 @@ const crearPedido = async (req, res) => {
       );
 
       if (r.affectedRows === 0) {
- throw new ErrorNegocio(`Stock insuficiente de "${p.nombre}"`);
+        throw new ErrorNegocio(`Stock insuficiente de "${p.nombre}"`);
       }
     }
 
     await conn.commit();
 
     res.status(201).json({
- mensaje: 'Pedido realizado',
+      mensaje: 'Pedido realizado',
       pedido: {
         id: pedido.insertId,
         total,
@@ -174,7 +150,6 @@ const crearPedido = async (req, res) => {
       },
     });
   } catch (err) {
-    // Si hubo conexión y transacción abierta, se deshace todo.
     if (conn) {
       try {
         await conn.rollback();
@@ -196,17 +171,10 @@ const crearPedido = async (req, res) => {
   }
 };
 
-/**
- * OBTENER PEDIDOS (SOLO ADMIN)
- *
- * Son dos consultas y no una por pedido: primero todas las cabeceras y
- * después todo el detalle de golpe con un IN. Pedir el detalle pedido a
- * pedido sería N+1: con 200 pedidos, 201 viajes a la base.
- *
- * Los DECIMAL llegan como cadena desde mysql2, así que se convierten a
- * número aquí para que el panel no tenga que hacerlo en cada celda.
- */
 const obtenerPedidos = async (req, res) => {
+  // Obtenemos el pool de promesas de forma dinámica aquí también
+  const pool = connection.promise();
+
   try {
     const [pedidos] = await pool.query(
       `SELECT p.id,
@@ -218,7 +186,7 @@ const obtenerPedidos = async (req, res) => {
               p.pais,
               p.moneda,
               u.nombre AS usuario_nombre,
-              u.email     AS usuario_email
+              u.email    AS usuario_email
          FROM pedidos p
          LEFT JOIN usuarios u ON u.id = p.usuario_id
      ORDER BY p.fecha DESC, p.id DESC`
@@ -236,7 +204,6 @@ const obtenerPedidos = async (req, res) => {
       [pedidos.map((p) => p.id)]
     );
 
-    // El detalle viene en una lista plana: se agrupa por pedido.
     const porPedido = new Map();
 
     for (const linea of detalle) {
